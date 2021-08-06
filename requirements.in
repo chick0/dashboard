@@ -1,0 +1,10 @@
+flask
+Flask-Migrate
+Flask-SQLAlchemy
+
+captcha
+
+mysqlclient
+
+waitress
+paste
