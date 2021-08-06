@@ -1,0 +1,12 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <section class="section">
+        <h1 class="title">회원가입</h1>
+        <h2 class="subtitle">이메일 인증</h2>
+
+        <div class="content is-large">
+            <p>해당 이메일은 이미 가입된 계정입니다.</p>
+            <p><a class="button is-link is-large" href="{{ url_for('dashboard.login.form') }}">로그인</a></p>
+        </div>
+    </section>
+{% endblock %}

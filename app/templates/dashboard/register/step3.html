@@ -2,31 +2,31 @@
 {% block content %}
     <section class="section">
         <h1 class="title">회원가입</h1>
-        <h2 class="subtitle">이메일 인증</h2>
+        <h2 class="subtitle">닉네임과 비밀번호 설정</h2>
     </section>
 
     <section class="section">
         <form method="post">
             <div class="field is-horizontal">
                 <div class="field-label is-normal">
-                    <label class="label">이메일 주소</label>
+                    <label class="label">닉네임</label>
                 </div>
                 <div class="field-body">
                     <div class="field">
                         <p class="control">
-                            <input class="input is-medium" value="{{ email }}" readonly="readonly">
+                            <input class="input is-medium" type="text" name="nickname" value="{{ nickname }}">
                         </p>
                     </div>
                 </div>
             </div>
             <div class="field is-horizontal">
                 <div class="field-label is-normal">
-                    <label class="label">인증번호</label>
+                    <label class="label">비밀번호</label>
                 </div>
                 <div class="field-body">
                     <div class="field">
                         <p class="control">
-                            <input class="input is-medium" name="token" type="tel" required="required">
+                            <input class="input is-medium" type="password" name="password" required="required">
                         </p>
                     </div>
                 </div>
@@ -34,5 +34,4 @@
             <button type="submit" class="button is-link is-medium is-fullwidth">다음</button>
         </form>
     </section>
-
 {% endblock %}

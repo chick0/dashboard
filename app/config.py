@@ -12,3 +12,10 @@ SESSION_COOKIE_SAMESITE = "Strict"
 # SQLALCHEMY
 SQLALCHEMY_DATABASE_URI = environ.get("dashboard_sql", default="sqlite:///dashboard.sqlite")
 SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+
+# SMTP
+SMTP_HOST = environ.get("dashboard_smtp_host", default="#")
+SMTP_PORT = environ.get("dashboard_smtp_post", default="#")
+SMTP_USER = environ.get("dashboard_smtp_user", default="#")
+SMTP_PASSWORD = environ.get("dashboard_smtp_password", default="#")

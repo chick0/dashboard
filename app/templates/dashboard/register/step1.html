@@ -6,7 +6,20 @@
     </section>
 
     <section class="section">
-        <h1 class="title"></h1>
-        <h2 class="subtitle"></h2>
+        <form method="post">
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">이메일 주소</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <p class="control">
+                            <input class="input is-medium" name="email" type="email" placeholder="이메일 주소" required="required">
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="button is-link is-medium is-fullwidth">다음</button>
+        </form>
     </section>
 {% endblock %}
