@@ -9,7 +9,7 @@ from . import db
 #   유저 비밀번호
 #   유저 닉네임
 #   유저 가입날짜
-class User:
+class User(db.Model):
     idx = db.Column(
         db.Integer,
         unique=True,
@@ -50,7 +50,7 @@ class User:
 #   로그인 시도 IP 주소
 #   로그인 시도 클라이언트의 에이전트 값
 #   로그인 시도 날짜
-class History:
+class History(db.Model):
     idx = db.Column(
         db.Integer,
         unique=True,
@@ -95,7 +95,7 @@ class History:
 #   등록날짜
 #   홈페이지
 #   콜백 링크
-class Application:
+class Application(db.Model):
     idx = db.Column(
         db.Integer,
         unique=True,
@@ -137,7 +137,7 @@ class Application:
 #   어플리케이션 아아디
 #   시크릿 키
 #   시크릿 생성 날짜
-class ApplicationSecret:
+class ApplicationSecret(db.Model):
     target_idx = db.Column(
         db.Integer,
         unique=True,
@@ -166,7 +166,7 @@ class ApplicationSecret:
 #   스코프 (=권한)
 #   코드
 #   유효날짜 [1시간]
-class Code:
+class Code(db.Model):
     application_idx = db.Column(
         db.Integer,
         primary_key=True,
@@ -204,7 +204,7 @@ class Code:
 #   스코프 (=권한)
 #   토큰
 #   유효날짜 [1주일]
-class Token:
+class Token(db.Model):
     application_idx = db.Column(
         db.Integer,
         primary_key=True,
