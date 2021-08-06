@@ -12,7 +12,12 @@ def create_app():
     app = Flask(__name__)
 
     from . import config
-    app.config.from_object(obj=config)
+    app.config.from_object(config)
+
+    # database init
+    __import__("app.models")
+    db.init_app(app)
+    migrate.init_app(app, db)
 
     # blueprint init
     from . import views
@@ -23,9 +28,5 @@ def create_app():
     from . import template_filter
     for name in template_filter.filter_list:
         app.add_template_filter(f=getattr(template_filter, name), name=name)
-
-    # client init
-    db.init_app(app=app)
-    migrate.init_app(app=app, db=db)
 
     return app
