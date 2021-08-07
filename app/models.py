@@ -233,4 +233,24 @@ class Token(db.Model):
     )
 
     def __repr__(self):
-        return f"<Token idx={self.application_idx}, email={self.target_idx}>"
+        return f"<Token idx={self.application_idx}, target_idx={self.target_idx}>"
+
+
+# 2단계 인증:
+#   유저 아이디
+#   인증 토큰
+class TwoFactor(db.Model):
+    user_idx = db.Column(
+        db.Integer,
+        unique=True,
+        primary_key=True,
+        nullable=False
+    )
+
+    secret = db.Column(
+        db.String(40),
+        nullable=False
+    )
+
+    def __repr__(self):
+        return f"<TwoFactor user_idx={self.user_idx}>"
