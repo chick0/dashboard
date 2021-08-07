@@ -16,6 +16,7 @@ from . import register
 from . import delete
 from . import application
 from . import two_factor
+from . import password
 
 
 bp = Blueprint(
@@ -28,6 +29,7 @@ bp.register_blueprint(register.bp)
 bp.register_blueprint(delete.bp)
 bp.register_blueprint(application.bp)
 bp.register_blueprint(two_factor.bp)
+bp.register_blueprint(password.bp)
 
 
 @bp.get("/logout")
