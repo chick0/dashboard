@@ -28,12 +28,8 @@ bp.register_blueprint(two_factor.bp)
 
 @bp.get("/logout")
 def logout():
-    try:
-        del session['user']
-        del session['two_factor']
-
-    except KeyError:
-        pass
+    for key in list(session.keys()):
+        del session[key]
 
     return redirect(url_for("dashboard.login.form"))
 
