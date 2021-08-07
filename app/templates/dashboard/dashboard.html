@@ -29,20 +29,17 @@
                     </div>
                 </div>
             </div>
-            <div class="field is-horizontal">
-                <div class="field-label is-medium">
-                    <label class="label">새로운 비밀번호</label>
-                </div>
-                <div class="field-body">
-                    <div class="field">
-                        <div class="control">
-                            <input class="input is-medium" type="password" name="password">
-                        </div>
-                    </div>
-                </div>
+            <button type="submit" class="button is-link is-medium is-fullwidth">사용자 정보 변경하기</button>
+        </form><br>
+
+        <div class="columns">
+            <div class="column">
+                <a class="button is-primary is-medium is-fullwidth" href="#">비밀번호 변경하기</a>
             </div>
-            <button type="submit" class="button is-link is-medium is-fullwidth">다음</button>
-        </form>
+            <div class="column">
+                <a class="button is-danger is-medium is-fullwidth" href="{{ url_for('dashboard.delete.ask') }}">탈퇴하기</a>
+            </div>
+        </div>
     </section>
 
     <section class="section">
@@ -64,16 +61,5 @@
             <a class="button is-success" href="{{ url_for('dashboard.two_factor.on') }}">2단계 인증 활성화 하기</a>
         </div>
     {% endif %}
-    </section>
-
-    <section class="section">
-        <div class="columns">
-            <div class="column">
-                <a class="button is-link is-medium is-fullwidth" href="{{ url_for('dashboard.logout') }}">로그아웃</a>
-            </div>
-            <div class="column">
-                <a class="button is-danger is-medium is-fullwidth" href="{{ url_for('dashboard.delete.ask') }}">탈퇴하기</a>
-            </div>
-        </div>
     </section>
 {% endblock %}
