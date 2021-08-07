@@ -27,6 +27,10 @@ def form():
 
 @bp.get("/step1")
 def step1():
+    login_user = session.get("user", None)
+    if login_user is not None:
+        return redirect(url_for("dashboard.dashboard"))
+
     return render_template(
         "dashboard/register/step1.html"
     )

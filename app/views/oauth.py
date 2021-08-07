@@ -1,7 +1,9 @@
 
 from flask import Blueprint
+from flask import session
 from flask import request
 from flask import redirect
+from flask import url_for
 from flask import render_template
 
 
@@ -14,6 +16,10 @@ bp = Blueprint(
 
 @bp.get("")
 def ask():
+    login_user = session.get("user", None)
+    if login_user is None:
+        return redirect(url_for("dashboard.login.form"))
+
     app_id = request.args.get("app_id", None)
     scope = request.args.get("scope", None)
 

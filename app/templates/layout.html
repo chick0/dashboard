@@ -27,10 +27,20 @@
                 </a>
             </div>
             <div class="navbar-menu" id="DashboardNavbar">
+            {% if session.get("user", none) is not none %}
+                {% set login = true %}
+            {% else %}
+                {% set login = false %}
+            {% endif %}
+
                 <div class="navbar-start">
+                {% if login is true %}
+                    <a class="navbar-item" href="{{ url_for('dashboard.login.form') }}">로그아웃</a>
+                    <a class="navbar-item" href="{{ url_for('dashboard.dashboard') }}">대시보드</a>
+                {% else %}
                     <a class="navbar-item" href="{{ url_for('dashboard.login.form') }}">로그인</a>
                     <a class="navbar-item" href="{{ url_for('dashboard.register.form') }}">회원가입</a>
-                    <a class="navbar-item" href="{{ url_for('dashboard.dashboard') }}">대시보드</a>
+                {% endif %}
                 </div>
             </div>
         </nav>

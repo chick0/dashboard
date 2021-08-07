@@ -2,7 +2,7 @@ flask
 Flask-Migrate
 Flask-SQLAlchemy
 
-captcha
+pyotp
 
 mysqlclient
 

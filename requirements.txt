@@ -6,8 +6,6 @@
 #
 alembic==1.6.5
     # via flask-migrate
-captcha==0.3
-    # via -r requirements.in
 click==8.0.1
     # via flask
 flask==2.0.1
@@ -37,8 +35,8 @@ mysqlclient==2.0.3
     # via -r requirements.in
 paste==3.5.0
     # via -r requirements.in
-pillow==8.3.1
-    # via captcha
+pyotp==2.6.0
+    # via -r requirements.in
 python-dateutil==2.8.2
     # via alembic
 python-editor==1.0.4

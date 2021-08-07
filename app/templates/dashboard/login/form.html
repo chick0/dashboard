@@ -4,4 +4,34 @@
         <h1 class="title">로그인</h1>
         <h2 class="subtitle"></h2>
     </section>
+
+    <section class="section">
+        <form method="post">
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">이메일</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <p class="control">
+                            <input class="input is-medium" type="email" name="email" required="required">
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">비밀번호</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <p class="control">
+                            <input class="input is-medium" type="password" name="password" required="required">
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="button is-link is-medium is-fullwidth">다음</button>
+        </form>
+    </section>
 {% endblock %}

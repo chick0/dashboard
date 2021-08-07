@@ -4,4 +4,22 @@
         <h1 class="title">2단계 인증</h1>
         <h2 class="subtitle">OTP 앱을 확인해주세요.</h2>
     </section>
+
+    <section class="section">
+        <form method="post">
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">인증코드</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <p class="control">
+                            <input class="input is-medium" type="tel" name="token" required="required">
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="button is-link is-medium is-fullwidth">다음</button>
+        </form>
+    </section>
 {% endblock %}
