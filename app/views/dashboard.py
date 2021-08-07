@@ -7,6 +7,8 @@ from flask import render_template
 
 from . import login
 from . import register
+from . import delete
+from . import application
 
 
 bp = Blueprint(
@@ -16,6 +18,19 @@ bp = Blueprint(
 )
 bp.register_blueprint(login.bp)
 bp.register_blueprint(register.bp)
+bp.register_blueprint(delete.bp)
+bp.register_blueprint(application.bp)
+
+
+@bp.get("/logout")
+def logout():
+    try:
+        del session['user']
+
+    except KeyError:
+        pass
+
+    return redirect(url_for("dashboard.login.form"))
 
 
 @bp.get("")

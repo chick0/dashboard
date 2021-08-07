@@ -1,7 +1,80 @@
 {% extends 'layout.html' %}
 {% block content %}
     <section class="section">
-        <h1 class="title"></h1>
-        <h2 class="subtitle"></h2>
+        <h1 class="title">대시보드</h1>
+        <h2 class="subtitle">사용자 정보 확인 및 수정</h2>
+
+        <form method="post" action="">
+            <div class="field is-horizontal">
+                <div class="field-label is-medium">
+                    <label class="label">이메일</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <input class="input is-medium" type="email" name="email" value="{{ session['user']['email'] }}" required="required">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="field is-horizontal">
+                <div class="field-label is-medium">
+                    <label class="label">이름</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <input class="input is-medium" type="text" name="name" value="{{ session['user']['nickname'] }}" required="required">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="field is-horizontal">
+                <div class="field-label is-medium">
+                    <label class="label">새로운 비밀번호</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <div class="control">
+                            <input class="input is-medium" type="password" name="password">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="button is-link is-medium is-fullwidth">다음</button>
+        </form>
+    </section>
+
+    <section class="section">
+        <h1 class="title">2단계 인증</h1>
+        <div class="content is-large">
+            <p><b>{{ session['user']['nickname'] }}</b>님의 계정은 2단계 인증이 <b class="tag is-dark is-medium">비활성화</b>상태 입니다.</p>
+        </div>
+
+        <div class="block">
+            <a class="button is-success" href="#">2단계 인증 활성화 하기</a>
+        </div>
+    </section>
+
+<!--    <section class="section">-->
+<!--        <h1 class="title">2단계 인증</h1>-->
+<!--        <div class="content is-large">-->
+<!--            <p><b>{{ session['user']['nickname'] }}</b>님의 계정은 2단계 인증이 <b class="tag is-success is-medium">활성화</b>상태 입니다.</p>-->
+<!--        </div>-->
+
+<!--        <div class="block">-->
+<!--            <a class="button is-link" href="#">2단계 인증 비활성화 하기</a>-->
+<!--        </div>-->
+<!--    </section>-->
+
+    <section class="section">
+        <div class="columns">
+            <div class="column">
+                <a class="button is-link is-medium is-fullwidth" href="{{ url_for('dashboard.logout') }}">로그아웃</a>
+            </div>
+            <div class="column">
+                <a class="button is-danger is-medium is-fullwidth" href="{{ url_for('dashboard.delete.ask') }}">탈퇴하기</a>
+            </div>
+        </div>
     </section>
 {% endblock %}

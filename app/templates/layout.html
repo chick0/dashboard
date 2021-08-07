@@ -35,8 +35,9 @@
 
                 <div class="navbar-start">
                 {% if login is true %}
-                    <a class="navbar-item" href="{{ url_for('dashboard.login.form') }}">로그아웃</a>
+                    <a class="navbar-item" href="{{ url_for('dashboard.logout') }}">로그아웃</a>
                     <a class="navbar-item" href="{{ url_for('dashboard.dashboard') }}">대시보드</a>
+                    <a class="navbar-item" href="{{ url_for('dashboard.application.show_all') }}">앱 관리하기</a>
                 {% else %}
                     <a class="navbar-item" href="{{ url_for('dashboard.login.form') }}">로그인</a>
                     <a class="navbar-item" href="{{ url_for('dashboard.register.form') }}">회원가입</a>
