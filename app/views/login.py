@@ -12,6 +12,7 @@ from app import db
 from app.models import User
 from app.models import History
 from app.ip import get_ip
+from app.config import SALT_PASSWORD
 
 
 bp = Blueprint(
@@ -49,7 +50,7 @@ def form_post():
 
     user = User.query.filter_by(
         email=email,
-        password=sha512(request.form.get("password", "").encode()).hexdigest(),
+        password=sha512(f"{request.form.get('password', '')}+{SALT_PASSWORD}".encode()).hexdigest(),
     ).first()
     if user is None:
         history.is_failed = True

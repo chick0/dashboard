@@ -19,3 +19,7 @@ SMTP_HOST = environ.get("dashboard_smtp_host", default="#")
 SMTP_PORT = environ.get("dashboard_smtp_post", default="#")
 SMTP_USER = environ.get("dashboard_smtp_user", default="#")
 SMTP_PASSWORD = environ.get("dashboard_smtp_password", default="#")
+
+
+# Password Salt
+SALT_PASSWORD = environ.get("dashboard_salt_password", default=":chick_0:kokoseij:")

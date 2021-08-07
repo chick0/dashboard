@@ -11,6 +11,7 @@ from flask import render_template
 from app.mail import send
 from app import db
 from app.models import User
+from app.config import SALT_PASSWORD
 
 
 bp = Blueprint(
@@ -124,7 +125,7 @@ def step3_post():
 
     user = User()
     user.email = register['email']
-    user.password = sha512(password.encode()).hexdigest()
+    user.password = sha512(f"{password}+{SALT_PASSWORD}".encode()).hexdigest()
     user.nickname = nickname[:32]
     db.session.add(user)
     db.session.commit()
