@@ -37,7 +37,15 @@
                 {% if login is true %}
                     <a class="navbar-item" href="{{ url_for('dashboard.logout') }}">로그아웃</a>
                     <a class="navbar-item" href="{{ url_for('dashboard.dashboard') }}">대시보드</a>
-                    <a class="navbar-item" href="{{ url_for('dashboard.application.show_all') }}">앱 관리하기</a>
+                    <div class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">앱 관리하기</a>
+                        <div class="navbar-dropdown">
+                            <a class="navbar-item" href="{{ url_for('dashboard.application.show_all') }}">로그인한 앱</a>
+                            <hr class="navbar-divider">
+                            <a class="navbar-item" href="{{ url_for('dashboard.application.my') }}">내 앱</a>
+                            <a class="navbar-item" href="{{ url_for('dashboard.application.register') }}">앱 등록하기</a>
+                        </div>
+                    </div>
                 {% else %}
                     <a class="navbar-item" href="{{ url_for('dashboard.login.form') }}">로그인</a>
                     <a class="navbar-item" href="{{ url_for('dashboard.register.form') }}">회원가입</a>
