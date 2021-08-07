@@ -5,10 +5,13 @@ from flask import redirect
 from flask import url_for
 from flask import render_template
 
+from app.check import is_two_factor_enabled
+from app.check import is_login
 from . import login
 from . import register
 from . import delete
 from . import application
+from . import two_factor
 
 
 bp = Blueprint(
@@ -20,12 +23,14 @@ bp.register_blueprint(login.bp)
 bp.register_blueprint(register.bp)
 bp.register_blueprint(delete.bp)
 bp.register_blueprint(application.bp)
+bp.register_blueprint(two_factor.bp)
 
 
 @bp.get("/logout")
 def logout():
     try:
         del session['user']
+        del session['two_factor']
 
     except KeyError:
         pass
@@ -35,12 +40,12 @@ def logout():
 
 @bp.get("")
 def dashboard():
-    login_user = session.get("user", None)
-    if login_user is None:
+    if not is_login():
         return redirect(url_for("dashboard.login.form"))
 
     return render_template(
-        "dashboard/dashboard.html"
+        "dashboard/dashboard.html",
+        two_factor=is_two_factor_enabled()
     )
 
 

@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <section class="section">
+        <h1 class="title">2단계 인증 활성화</h1>
+        <h2 class="subtitle">아래의 QR 코드를 OTP 앱에서 인식시켜주세요.</h2>
+
+        <div class="columns">
+            <div class="column">
+                <img class="image" src="https://chart.apis.google.com/chart?cht=qr&chs=250x250&chl={{ qr_url }}">
+            </div>
+        </div>
+
+        <a class="button is-link is-medium is-fullwidth" href="{{ url_for('dashboard.two_factor.check') }}">다음</a>
+    </section>
+{% endblock %}

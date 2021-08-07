@@ -11,8 +11,12 @@ from pyotp.totp import TOTP
 from app import db
 from app.models import User
 from app.models import History
+from app.models import TwoFactor
 from app.ip import get_ip
 from app.config import SALT_PASSWORD
+from app.check import is_two_factor_enabled
+from app.check import is_two_factor_passed
+from app.check import is_login
 
 
 bp = Blueprint(
@@ -24,8 +28,10 @@ bp = Blueprint(
 
 @bp.get("")
 def form():
-    login_user = session.get("user", None)
-    if login_user is not None:
+    if is_login(no_two_factor=True):
+        if not is_two_factor_passed():
+            return redirect(url_for("dashboard.login.two_factor_verify"))
+
         return redirect(url_for("dashboard.dashboard"))
 
     return render_template(
@@ -43,7 +49,7 @@ def form_post():
     ##################################################
     history = History()
     history.email = email
-    history.is_failed = False
+    # history.is_failed = ???
     history.ip = get_ip()
     history.user_agent = request.user_agent
     ##################################################
@@ -58,9 +64,24 @@ def form_post():
         db.session.commit()
 
         return redirect(url_for("dashboard.login.form"))
+    else:
+        history.is_failed = False
+        db.session.add(history)
+        db.session.commit()
 
-    db.session.add(history)
-    db.session.commit()
+    two_factor = TwoFactor.query.filter_by(
+        user_idx=user.idx
+    ).first()
+    if two_factor is None:
+        session['two_factor'] = {
+            "status": False,
+            "passed": False,
+        }
+    else:
+        session['two_factor'] = {
+            "status": True,
+            "passed": False,
+        }
 
     session['user'] = {
         "idx": user.idx,
@@ -71,30 +92,38 @@ def form_post():
     return redirect(url_for("dashboard.dashboard"))
 
 
-@bp.get("/2fa")
-def verify():
-    login_user = session.get("user", None)
-    if login_user is None:
-        return redirect(url_for("dashboard.login.form"))
+@bp.get("/two-factor")
+def two_factor_verify():
+    if not is_login(no_two_factor=True):
+        return redirect(url_for("dashboard.dashboard"))
 
     return render_template(
-        "dashboard/login/2fa.html"
+        "dashboard/login/two_factor.html"
     )
 
 
-@bp.get("/2fa")
-def verify_post():
-    login_user = session.get("user", None)
-    if login_user is None:
-        return redirect(url_for("dashboard.login.form"))
+@bp.post("/two-factor")
+def two_factor_verify_post():
+    if not is_login(no_two_factor=True):
+        return redirect(url_for("dashboard.dashboard"))
+
+    if not is_two_factor_enabled():
+        return redirect(url_for("dashboard.dashboard"))
 
     token = request.form.get("token", None)
     if token is None:
         return redirect(url_for("dashboard.login.verify"))
 
-    # TODO:디비 모델 만들기
-    # TODO:OTP 인증 만들기
+    two_factor = TwoFactor.query.filter_by(
+        user_idx=session['user']['idx']
+    ).first()
 
-    # TOTP("secret").verify(otp=token)
+    result = TOTP(two_factor.secret).verify(otp=token)
+
+    if result:
+        session['two_factor'] = {
+            "status": True,
+            "passed": True,
+        }
 
     return redirect(url_for("dashboard.dashboard"))

@@ -9,6 +9,7 @@ from flask import url_for
 from flask import render_template
 
 from app.mail import send
+from app.check import is_login
 from app import db
 from app.models import User
 from app.config import SALT_PASSWORD
@@ -28,8 +29,7 @@ def form():
 
 @bp.get("/step1")
 def step1():
-    login_user = session.get("user", None)
-    if login_user is not None:
+    if is_login():
         return redirect(url_for("dashboard.dashboard"))
 
     return render_template(

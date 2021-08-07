@@ -47,25 +47,24 @@
 
     <section class="section">
         <h1 class="title">2단계 인증</h1>
+    {% if two_factor is true %}
+        <div class="content is-large">
+            <p><b>{{ session['user']['nickname'] }}</b>님의 계정은 2단계 인증이 <b class="tag is-success is-medium">활성화</b>된 상태입니다.</p>
+        </div>
+
+        <div class="block">
+            <a class="button is-link" href="{{ url_for('dashboard.two_factor.off') }}">2단계 인증 비활성화 하기</a>
+        </div>
+    {% else %}
         <div class="content is-large">
             <p><b>{{ session['user']['nickname'] }}</b>님의 계정은 2단계 인증이 <b class="tag is-dark is-medium">비활성화</b>된 상태입니다.</p>
         </div>
 
         <div class="block">
-            <a class="button is-success" href="#">2단계 인증 활성화 하기</a>
+            <a class="button is-success" href="{{ url_for('dashboard.two_factor.on') }}">2단계 인증 활성화 하기</a>
         </div>
+    {% endif %}
     </section>
-
-<!--    <section class="section">-->
-<!--        <h1 class="title">2단계 인증</h1>-->
-<!--        <div class="content is-large">-->
-<!--            <p><b>{{ session['user']['nickname'] }}</b>님의 계정은 2단계 인증이 <b class="tag is-success is-medium">활성화</b>된 상태입니다.</p>-->
-<!--        </div>-->
-
-<!--        <div class="block">-->
-<!--            <a class="button is-link" href="#">2단계 인증 비활성화 하기</a>-->
-<!--        </div>-->
-<!--    </section>-->
 
     <section class="section">
         <div class="columns">
