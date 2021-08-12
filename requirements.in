@@ -1,6 +1,6 @@
 flask
-Flask-Migrate
-Flask-SQLAlchemy
+flask-migrate
+flask-sqlalchemy
 
 pyotp
 
