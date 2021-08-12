@@ -140,7 +140,6 @@ class Application(db.Model):
 class ApplicationSecret(db.Model):
     target_idx = db.Column(
         db.Integer,
-        unique=True,
         primary_key=True,
         nullable=False
     )
@@ -157,7 +156,7 @@ class ApplicationSecret(db.Model):
     )
 
     def __repr__(self):
-        return f"<User target_idx={self.target_idx}>"
+        return f"<ApplicationSecret target_idx={self.target_idx}>"
 
 
 # 토큰 생성 코드:
