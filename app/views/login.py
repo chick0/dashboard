@@ -48,14 +48,14 @@ def form_post():
 
     ##################################################
     history = History()
-    history.email = email
+    history.email = email[:128]
     # history.is_failed = ???
     history.ip = get_ip()
     history.user_agent = request.user_agent
     ##################################################
 
     user = User.query.filter_by(
-        email=email,
+        email=email[:128],
         password=sha512(f"{request.form.get('password', '')}+{SALT_PASSWORD}".encode()).hexdigest(),
     ).first()
     if user is None:

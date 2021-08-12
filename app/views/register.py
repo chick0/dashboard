@@ -124,7 +124,7 @@ def step3_post():
         return redirect(url_for("dashboard.register.step3"))
 
     user = User()
-    user.email = register['email']
+    user.email = register['email'][:128]
     user.password = sha512(f"{password}+{SALT_PASSWORD}".encode()).hexdigest()
     user.nickname = nickname[:32]
     db.session.add(user)
