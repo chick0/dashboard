@@ -1,10 +1,13 @@
 
 from flask import Blueprint
 from flask import request
+from flask import session
 from flask import redirect
 from flask import url_for
 from flask import render_template
 
+from app import db
+from app.models import Token
 from app.check import is_login
 
 
@@ -41,3 +44,18 @@ def callback():
 
     callback_url = "/"
     return redirect(callback_url)
+
+
+@bp.get("/revoke/<string:app_idx>")
+def revoke(app_idx: str):
+    if not is_login():
+        return redirect(url_for("dashboard.login.form"))
+
+    Token.query.filter_by(
+        application_idx=app_idx,
+        target_idx=session['user']['idx']
+    ).delete()
+
+    db.session.commit()
+
+    return redirect(url_for("dashboard.application.show_all"))

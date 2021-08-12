@@ -1,0 +1,13 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <section class="section">
+        <h1 class="title">오류</h1>
+        <h2 class="subtitle"></h2>
+
+        <div class="content is-large">
+            <p>이 기능을 사용하려면 2단계 인증을 활성화 해야 합니다.</p>
+        </div>
+
+        <a class="button is-success is-large" href="{{ url_for('dashboard.two_factor.on') }}">2단계 인증 활성화 하기</a>
+    </section>
+{% endblock %}

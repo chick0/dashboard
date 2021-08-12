@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <section class="section">
+        <h1 class="title">{{ app.name }}</h1>
+        <h2 class="subtitle">by {{ owner.nickname }}</h2>
+    {% if is_owner %}
+        <div class="block">
+            <a class="button is-link is-medium" href="{{ url_for('dashboard.application.detail.edit', app_idx=app.idx) }}">수정하기</a>
+            <a class="button is-danger is-medium" href="{{ url_for('dashboard.application.detail.delete', app_idx=app.idx) }}">삭제하기</a>
+        </div>
+    {% endif %}
+    </section>
+
+{% if token is not none %}
+    <section class="section">
+        <div class="content is-large">
+            <div class="columns">
+                <div class="column is-one-fifth">로그인 허용날짜</div>
+                <div class="column">{{ token.date }}</div>
+            </div>
+            <div class="columns">
+                <div class="column is-one-fifth">허용된 권한</div>
+                <div class="column">{{ token.scope }}</div>
+            </div>
+        </div>
+        <a class="button is-danger" href="{{ url_for('oauth.revoke', app_idx=app.idx) }}">취소하기</a>
+    </section>
+{% endif %}
+
+    <section class="section">
+        <div class="content is-large">
+            <div class="columns">
+                <div class="column is-one-fifth">홈페이지</div>
+                <div class="column"><a href="{{ app.homepage }}">{{ app.homepage }}</a></div>
+            </div>
+            <div class="columns">
+                <div class="column is-one-fifth">등록날짜</div>
+                <div class="column">{{ app.date }}</div>
+            </div>
+            <div class="columns">
+                <div class="column is-one-fifth">개발자 이메일</div>
+                <div class="column"><a href="mailto:{{ owner.email }}">{{ owner.email }}</a></div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

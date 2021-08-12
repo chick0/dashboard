@@ -1,3 +1,4 @@
+from urllib.parse import urlparse
 
 from flask import session
 
@@ -27,3 +28,16 @@ def is_login(no_two_factor: bool = False) -> bool:
         return True
     else:
         return is_two_factor_passed()
+
+
+def url_verifier(url: str, fallback: str = "") -> str:
+    url = urlparse(url=url)
+    allow_schemes = [
+        "http",
+        "https",
+    ]
+
+    if url.scheme not in allow_schemes:
+        return fallback
+
+    return url.geturl()
