@@ -46,7 +46,7 @@ def step3():
 
 
 @bp.post("/step3")
-def step3():
+def step3_post():
     return redirect(url_for("dashboard.lost.step4"))
 
 
