@@ -20,7 +20,7 @@
             </div>
             <div class="columns">
                 <div class="column is-one-fifth">허용된 권한</div>
-                <div class="column">{{ token.scope }}</div>
+                <div class="column">{{ token.scope|scope_display }}</div>
             </div>
         </div>
         <a class="button is-danger" href="{{ url_for('oauth.revoke', app_idx=app.idx) }}">취소하기</a>
