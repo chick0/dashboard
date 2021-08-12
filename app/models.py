@@ -169,7 +169,7 @@ class ApplicationSecret(db.Model):
 #   타겟 유저 아이디
 #   스코프 (=권한)
 #   코드
-#   유효날짜 [1시간]
+#   코드 생성 날짜
 class Code(db.Model):
     application_idx = db.Column(
         db.Integer,
@@ -192,7 +192,7 @@ class Code(db.Model):
         nullable=False
     )
 
-    expiry_date = db.Column(
+    date = db.Column(
         db.DateTime,
         nullable=False,
         default=func.now()
@@ -207,7 +207,7 @@ class Code(db.Model):
 #   타겟 유저 아이디
 #   스코프 (=권한)
 #   토큰
-#   유효날짜 [1주일]
+#   토큰 생성 날짜
 class Token(db.Model):
     application_idx = db.Column(
         db.Integer,
@@ -230,7 +230,7 @@ class Token(db.Model):
         nullable=False
     )
 
-    expiry_date = db.Column(
+    date = db.Column(
         db.DateTime,
         nullable=False,
         default=func.now()
