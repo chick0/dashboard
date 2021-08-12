@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <section class="section">
+        <h1 class="title">로그인 기록</h1>
+    {% if not history.is_failed %}
+        <h2 class="subtitle"><b class="tag is-success is-medium">성공</b></h2>
+    {% else %}
+        <h2 class="subtitle"><b class="tag is-danger is-medium">실패</b></h2>
+    {% endif %}
+    </section>
+
+    <section class="section">
+        <div class="content is-large">
+            <div class="columns">
+                <div class="column is-one-fifth">날짜</div>
+                <div class="column">{{ history.date }}</div>
+            </div>
+            <div class="columns">
+                <div class="column is-one-fifth">아이피 주소</div>
+                <div class="column">{{ history.ip }}</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="content is-large">
+            <div class="columns">
+                <div class="column is-one-fifth">운영체제</div>
+                <div class="column">{{ history.user_agent|user_agent_os }}</div>
+            </div>
+            <div class="columns">
+                <div class="column is-one-fifth">브라우저</div>
+                <div class="column">{{ history.user_agent|user_agent_browser }}</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <a class="button is-link" href="{{ url_for('dashboard.history.delete', idx=history.idx) }}">이 기록 삭제하기</a>
+    </section>
+{% endblock %}

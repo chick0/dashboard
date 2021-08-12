@@ -6,5 +6,8 @@ pyotp
 
 mysqlclient
 
+pyyaml
+ua-parser
+
 waitress
 paste

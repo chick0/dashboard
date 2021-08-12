@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <section class="section">
+        <h1 class="title">로그인 기록</h1>
+        <h2 class="subtitle">로그인 기록은 이메일 주소를 기준으로 기록됩니다.</h2>
+
+        <div class="content is-large">
+            <ol>
+            {% for history in history_list %}
+                <li>
+                {% if not history.is_failed %}
+                    <b class="tag is-success is-medium">성공</b>
+                {% else %}
+                    <b class="tag is-danger is-medium">실패</b>
+                {% endif %}
+
+                    <a href="{{ url_for('dashboard.history.detail', idx=history.idx) }}">({{ history.date }}) {{ history.ip }}</a>
+                </li>
+            {% endfor %}
+            </ol>
+        </div>
+    </section>
+{% endblock %}

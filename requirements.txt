@@ -41,6 +41,8 @@ python-dateutil==2.8.2
     # via alembic
 python-editor==1.0.4
     # via alembic
+pyyaml==5.4.1
+    # via -r requirements.in
 six==1.16.0
     # via
     #   paste
@@ -49,6 +51,8 @@ sqlalchemy==1.4.22
     # via
     #   alembic
     #   flask-sqlalchemy
+ua-parser==0.10.0
+    # via -r requirements.in
 waitress==2.0.0
     # via -r requirements.in
 werkzeug==2.0.1

@@ -19,6 +19,7 @@ from . import application
 from . import two_factor
 from . import password
 from . import lost
+from . import history
 
 
 bp = Blueprint(
@@ -33,6 +34,7 @@ bp.register_blueprint(application.bp)
 bp.register_blueprint(two_factor.bp)
 bp.register_blueprint(password.bp)
 bp.register_blueprint(lost.bp)
+bp.register_blueprint(history.bp)
 
 
 @bp.get("/logout")
