@@ -8,6 +8,7 @@ from flask import render_template
 
 from app import db
 from app.models import User
+from app.models import TwoFactor
 from app.check import is_two_factor_enabled
 from app.check import is_login
 from app.mail import send
@@ -46,6 +47,14 @@ def logout():
 def dashboard():
     if not is_login():
         return redirect(url_for("dashboard.login.form"))
+
+    if TwoFactor.query.filter_by(
+        user_idx=session['user']['idx']
+    ).first() is not None:
+        session['two_factor'] = {
+            "status": True,
+            "passed": session['two_factor']['passed'],
+        }
 
     return render_template(
         "dashboard/dashboard.html",
