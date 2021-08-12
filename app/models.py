@@ -129,6 +129,11 @@ class Application(db.Model):
         nullable=False
     )
 
+    delete = db.Column(
+        db.Boolean,
+        nullable=False
+    )
+
     def __repr__(self):
         return f"<Application idx={self.idx}, owner_idx={self.owner_idx}>"
 
