@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 076793672295
+Revision ID: 4af0e356f1d6
 Revises: 
-Create Date: 2021-08-12 22:09:04.685744
+Create Date: 2021-08-13 13:37:39.946793
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '076793672295'
+revision = '4af0e356f1d6'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -36,12 +36,14 @@ def upgrade():
     sa.PrimaryKeyConstraint('target_idx')
     )
     op.create_table('code',
+    sa.Column('idx', sa.Integer(), nullable=False),
     sa.Column('application_idx', sa.Integer(), nullable=False),
     sa.Column('target_idx', sa.Integer(), nullable=False),
     sa.Column('scope', sa.String(length=64), nullable=False),
     sa.Column('code', sa.String(length=32), nullable=False),
     sa.Column('date', sa.DateTime(), nullable=False),
-    sa.PrimaryKeyConstraint('application_idx')
+    sa.PrimaryKeyConstraint('idx'),
+    sa.UniqueConstraint('idx')
     )
     op.create_table('history',
     sa.Column('idx', sa.Integer(), nullable=False),
@@ -54,12 +56,14 @@ def upgrade():
     sa.UniqueConstraint('idx')
     )
     op.create_table('token',
+    sa.Column('idx', sa.Integer(), nullable=False),
     sa.Column('application_idx', sa.Integer(), nullable=False),
     sa.Column('target_idx', sa.Integer(), nullable=False),
     sa.Column('scope', sa.String(length=64), nullable=False),
     sa.Column('token', sa.String(length=128), nullable=False),
     sa.Column('date', sa.DateTime(), nullable=False),
-    sa.PrimaryKeyConstraint('application_idx')
+    sa.PrimaryKeyConstraint('idx'),
+    sa.UniqueConstraint('idx')
     )
     op.create_table('two_factor',
     sa.Column('user_idx', sa.Integer(), nullable=False),

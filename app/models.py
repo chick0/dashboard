@@ -161,7 +161,7 @@ class ApplicationSecret(db.Model):
     )
 
     def __repr__(self):
-        return f"<ApplicationSecret target_idx={self.target_idx}>"
+        return f"<ApplicationSecret idx={self.idx}, target_idx={self.target_idx}>"
 
 
 # 토큰 생성 코드:
@@ -171,9 +171,15 @@ class ApplicationSecret(db.Model):
 #   코드
 #   코드 생성 날짜
 class Code(db.Model):
+    idx = db.Column(
+        db.Integer,
+        unique=True,
+        primary_key=True,
+        nullable=False
+    )
+
     application_idx = db.Column(
         db.Integer,
-        primary_key=True,
         nullable=False
     )
 
@@ -199,7 +205,7 @@ class Code(db.Model):
     )
 
     def __repr__(self):
-        return f"<Code application_idx={self.application_idx}, target_idx={self.target_idx}>"
+        return f"<Code idx={self.idx}, application_idx={self.application_idx}, target_idx={self.target_idx}>"
 
 
 # 접속 토큰:
@@ -209,9 +215,15 @@ class Code(db.Model):
 #   토큰
 #   토큰 생성 날짜
 class Token(db.Model):
+    idx = db.Column(
+        db.Integer,
+        unique=True,
+        primary_key=True,
+        nullable=False
+    )
+
     application_idx = db.Column(
         db.Integer,
-        primary_key=True,
         nullable=False
     )
 
@@ -237,7 +249,7 @@ class Token(db.Model):
     )
 
     def __repr__(self):
-        return f"<Token idx={self.application_idx}, target_idx={self.target_idx}>"
+        return f"<Token idx={self.idx}, idx={self.application_idx}, target_idx={self.target_idx}>"
 
 
 # 2단계 인증:
