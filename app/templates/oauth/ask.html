@@ -1,7 +1,18 @@
 {% extends 'layout.html' %}
 {% block content %}
-    <section class="section">
-        <h1 class="title"></h1>
-        <h2 class="subtitle"></h2>
+    <section class="hero is-fullheight-with-navbar">
+        <div class="hero-body">
+            <div class="container has-text-centered">
+                <h1 class="subtitle is-4"><a href="{{ url_for('dashboard.application.detail.show', app_idx=app.idx) }}" target="_blank">{{ app.name }}</a>에 로그인 하기</h1>
+
+                <div class="content">
+                    <blockquote>
+                        이 어플리케이션이 다음과 같은 정보를 요청합니다.<br>
+                        <b>{{ scope|scope_display }}</b>
+                    </blockquote>
+                </div>
+                <a class="button is-primary is-large" href="{{ url_for('oauth.callback', key=key) }}">로그인</a>
+            </div>
+        </div>
     </section>
 {% endblock %}
