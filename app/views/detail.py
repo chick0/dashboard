@@ -13,6 +13,7 @@ from app.models import Application
 from app.check import is_two_factor_enabled
 from app.check import is_login
 from app.check import url_verifier
+from app.custom_error import TwoFactorRequired
 
 
 bp = Blueprint(
@@ -58,9 +59,7 @@ def edit(app_idx: str):
         return redirect(url_for("dashboard.login.form"))
 
     if not is_two_factor_enabled():
-        return render_template(
-            "error/two_factor_required.html"
-        ), 400
+        raise TwoFactorRequired
 
     app = Application.query.filter_by(
         idx=app_idx,
@@ -82,9 +81,7 @@ def edit_post(app_idx: str):
         return redirect(url_for("dashboard.login.form"))
 
     if not is_two_factor_enabled():
-        return render_template(
-            "error/two_factor_required.html"
-        ), 400
+        raise TwoFactorRequired
 
     app = Application.query.filter_by(
         idx=app_idx,
@@ -114,9 +111,7 @@ def delete(app_idx: str):
         return redirect(url_for("dashboard.login.form"))
 
     if not is_two_factor_enabled():
-        return render_template(
-            "error/two_factor_required.html"
-        ), 400
+        raise TwoFactorRequired
 
     app = Application.query.filter_by(
         idx=app_idx,

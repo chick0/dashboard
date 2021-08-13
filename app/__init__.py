@@ -29,4 +29,9 @@ def create_app():
     for name in template_filter.filter_list:
         app.add_template_filter(f=getattr(template_filter, name), name=name)
 
+    # register error handler
+    from .custom_error import error_map
+    for error in error_map:
+        app.register_error_handler(error, error_map[error])
+
     return app

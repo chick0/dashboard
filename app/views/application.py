@@ -12,6 +12,7 @@ from app.models import Token
 from app.check import is_two_factor_enabled
 from app.check import is_login
 from app.check import url_verifier
+from app.custom_error import TwoFactorRequired
 from . import detail
 
 
@@ -70,9 +71,7 @@ def register():
         return redirect(url_for("dashboard.login.form"))
 
     if not is_two_factor_enabled():
-        return render_template(
-            "error/two_factor_required.html"
-        ), 400
+        raise TwoFactorRequired
 
     return render_template(
         "dashboard/application/register.html"
@@ -85,9 +84,7 @@ def register_post():
         return redirect(url_for("dashboard.login.form"))
 
     if not is_two_factor_enabled():
-        return render_template(
-            "error/two_factor_required.html"
-        ), 400
+        raise TwoFactorRequired
 
     app = Application()
     app.name = request.form.get("name", "이름 없는 어플리케이션")[:20]
