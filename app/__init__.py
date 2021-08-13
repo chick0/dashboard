@@ -34,4 +34,9 @@ def create_app():
     for error in error_map:
         app.register_error_handler(error, error_map[error])
 
+    # background task
+    from threading import Thread
+    from .task import loop
+    Thread(target=loop, args=(app,), daemon=True).start()
+
     return app
