@@ -3,12 +3,12 @@
     <section class="section">
         <h1 class="title">{{ _title }}</h1>
 
-        <div class="content is-large">
-            <ul>
+        <div class="menu is-large">
+            <ol class="menu-list">
             {% for app in app_list %}
                 <li><a href="{{ url_for('dashboard.application.detail.show', app_idx=app.idx) }}">{{ app.name }}</a></li>
             {% endfor %}
-            </ul>
+            </ol>
         </div>
     </section>
 {% endblock %}
