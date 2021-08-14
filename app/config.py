@@ -22,4 +22,4 @@ SMTP_PASSWORD = environ.get("dashboard_smtp_password", default="#")
 
 
 # Password Salt
-SALT_PASSWORD = environ.get("dashboard_salt_password", default=":chick_0:kokoseij:")
+SALT_PASSWORD = environ.get("dashboard_salt_password", default="P6jpMNDh4nNT6Jchick0guJNRFyeNZBN")
