@@ -11,5 +11,4 @@ ua-parser
 
 pyjwt
 
-waitress
-paste
+gunicorn

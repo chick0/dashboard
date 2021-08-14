@@ -10,10 +10,10 @@
 
 2. 설정하기 (설정하기 섹션 참고)
 
-3. 서버 스크립트 실행하기
+3. 서버 실행하기
 
    ```bash
-   python start.py
+   gunicorn -c gunicorn.py
    ```
 
 ## 설정하기
@@ -40,3 +40,7 @@
     ```
 
     - 주의사항 : 이 설정 값이 변경되면 기존 계정에 로그인 할 수 없습니다.
+
+4. gunicorn 설정
+
+   - `gunicorn.py` 파일이 설정 파일 입니다. [자세한 정보](https://docs.gunicorn.org/en/stable/settings.html)

@@ -21,6 +21,8 @@ flask-sqlalchemy==2.5.1
     #   flask-migrate
 greenlet==1.1.0
     # via sqlalchemy
+gunicorn==20.1.0
+    # via -r requirements.in
 itsdangerous==2.0.1
     # via flask
 jinja2==3.0.1
@@ -33,8 +35,6 @@ markupsafe==2.0.1
     #   mako
 mysqlclient==2.0.3
     # via -r requirements.in
-paste==3.5.0
-    # via -r requirements.in
 pyjwt==2.1.0
     # via -r requirements.in
 pyotp==2.6.0
@@ -46,16 +46,12 @@ python-editor==1.0.4
 pyyaml==5.4.1
     # via -r requirements.in
 six==1.16.0
-    # via
-    #   paste
-    #   python-dateutil
+    # via python-dateutil
 sqlalchemy==1.4.22
     # via
     #   alembic
     #   flask-sqlalchemy
 ua-parser==0.10.0
-    # via -r requirements.in
-waitress==2.0.0
     # via -r requirements.in
 werkzeug==2.0.1
     # via flask
