@@ -34,28 +34,15 @@ def step2():
 
 @bp.post("/step2")
 def step2_post():
-    # TODO:2단계 인증이 설정되어 있다면 한번 더 검증
-
     return redirect(url_for("dashboard.lost.step3"))
 
 
 @bp.get("/step3")
 def step3():
-    # TODO:2단계 인증하기
+    # TODO:새로운 비밀번호 입력받기
     return ""
 
 
 @bp.post("/step3")
 def step3_post():
-    return redirect(url_for("dashboard.lost.step4"))
-
-
-@bp.get("/step4")
-def step4():
-    # TODO:새로운 비밀번호 입력받기
-    return ""
-
-
-@bp.post("/step4")
-def step4_post():
     return redirect(url_for("dashboard.login.form"))
