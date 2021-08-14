@@ -1,6 +1,7 @@
 
 from flask import Blueprint
-from flask import render_template
+from flask import redirect
+from flask import url_for
 
 
 bp = Blueprint(
@@ -10,8 +11,6 @@ bp = Blueprint(
 )
 
 
-@bp.get("/")
-def about():
-    return render_template(
-        "index/about.html"
-    )
+@bp.get("")
+def goto_dashboard():
+    return redirect(url_for("dashboard.dashboard"))
