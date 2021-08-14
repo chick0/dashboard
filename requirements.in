@@ -9,5 +9,7 @@ mysqlclient
 pyyaml
 ua-parser
 
+pyjwt
+
 waitress
 paste
