@@ -31,7 +31,7 @@ def ask():
         return redirect(url_for("dashboard.login.form"))
 
     try:
-        app_id = int(request.args.get("app_id", None))
+        app_id = int(request.args.get("app_id", "None"))
         if app_id <= 0:
             return abort(400)
     except ValueError:
