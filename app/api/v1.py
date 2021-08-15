@@ -61,6 +61,11 @@ def token():
     if code.date + ttl <= datetime.now():
         raise ApiErrorCodeExpired
 
+    Token.query.filter_by(
+        application_idx=code.application_idx,
+        target_idx=code.target_idx
+    ).delete()
+
     new_token = Token()
     new_token.application_idx = code.application_idx
     new_token.target_idx = code.target_idx
