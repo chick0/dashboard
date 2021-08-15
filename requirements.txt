@@ -19,8 +19,12 @@ flask-sqlalchemy==2.5.1
     # via
     #   -r requirements.in
     #   flask-migrate
+gevent==21.8.0
+    # via -r requirements.in
 greenlet==1.1.0
-    # via sqlalchemy
+    # via
+    #   gevent
+    #   sqlalchemy
 gunicorn==20.1.0
     # via -r requirements.in
 itsdangerous==2.0.1
@@ -55,3 +59,7 @@ ua-parser==0.10.0
     # via -r requirements.in
 werkzeug==2.0.1
     # via flask
+zope.event==4.5.0
+    # via gevent
+zope.interface==5.4.0
+    # via gevent

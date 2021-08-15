@@ -12,3 +12,4 @@ ua-parser
 pyjwt
 
 gunicorn
+gevent
