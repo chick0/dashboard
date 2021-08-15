@@ -38,7 +38,8 @@ def ask():
         return abort(400)
 
     app = Application.query.filter_by(
-        idx=app_id
+        idx=app_id,
+        delete=False
     ).first()
     if app is None:
         return abort(404)
@@ -74,7 +75,8 @@ def callback(key: str):
         raise OAuthTimeOut
 
     app = Application.query.filter_by(
-        idx=oauth_data['app_id']
+        idx=oauth_data['app_id'],
+        delete=False
     ).first()
     if app is None:
         return abort(404)
