@@ -8,7 +8,6 @@ from flask import render_template
 
 from app import db
 from app.models import User
-from app.models import TwoFactor
 from app.check import is_two_factor_enabled
 from app.check import is_login
 from app.mail import send
@@ -52,18 +51,6 @@ def dashboard():
     # 로그인 상태가 아니라면 로그인 화면으로 이동하기
     if not is_login():
         return redirect(url_for("dashboard.login.form"))
-
-    # 2단계 인증 확인하기
-    if TwoFactor.query.filter_by(
-        user_idx=session['user']['idx']
-    ).first() is not None:
-        # 2단계 인증이 설정되어 있다면,
-        # - 2단계 인증 활성화 상태로 세션에 저장하기
-
-        session['two_factor'] = {
-            "status": True,
-            "passed": session['two_factor']['passed'],
-        }
 
     return render_template(
         "dashboard/dashboard.html",
