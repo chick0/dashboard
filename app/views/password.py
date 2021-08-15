@@ -175,6 +175,13 @@ def step3_post():
         # 맨처음 화면으로 이동하기
         return redirect(url_for("dashboard.password.step1"))
 
+    # 입력받은 비밀번호 값 가져오기
+    password = request.form.get("password", password_update['raw_password'])
+
+    # 입력받은 비밀번호가 없거나 비밀번호가 8자리 보다 짧다면
+    if password is None or len(password) < 8:
+        return redirect(url_for("dashboard.password.step3"))
+
     # 로그인중인 유저 데이터와 1단계에서 입력 받은 비밀번호를 이용해 데이터베이스에서 유저정보를 검색하기
     user = User.query.filter_by(
         email=session['user']['email'],
@@ -189,9 +196,7 @@ def step3_post():
     # 만약 2단계 인증을 통과한 상태라면
     if password_update['otp_passed']:
         # 입력받은 비밀번호로 유저 비밀번호 업데이트 하기
-        user.password = sha512(
-            f"{request.form.get('password', password_update['raw_password'])}+{SALT_PASSWORD}".encode()
-        ).hexdigest()
+        user.password = sha512(f"{password}+{SALT_PASSWORD}".encode()).hexdigest()
 
         # 변경사항 데이터베이스에 저장하기
         db.session.commit()
