@@ -11,23 +11,8 @@
     {% endif %}
     </section>
 
-{% if token is not none %}
     <section class="section">
-        <div class="content is-large">
-            <div class="columns">
-                <div class="column is-one-fifth">허용날짜</div>
-                <div class="column">{{ token.date }}</div>
-            </div>
-            <div class="columns">
-                <div class="column is-one-fifth">허용된 권한</div>
-                <div class="column">{{ token.scope|scope_display }}</div>
-            </div>
-        </div>
-        <a class="button is-danger" href="{{ url_for('oauth.revoke', app_idx=app.idx) }}">취소하기</a>
-    </section>
-{% endif %}
-
-    <section class="section">
+        <h2 class="title is-4">어플리케이션 정보</h2>
         <div class="content is-large">
             <div class="columns">
                 <div class="column is-one-fifth">홈페이지</div>
@@ -43,4 +28,63 @@
             </div>
         </div>
     </section>
+
+{% if token is not none %}
+    <section class="section">
+        <h2 class="title is-4">로그인 정보</h2>
+        <div class="content is-large">
+            <div class="columns">
+                <div class="column is-one-fifth">허용날짜</div>
+                <div class="column">{{ token.date }}</div>
+            </div>
+            <div class="columns">
+                <div class="column is-one-fifth">허용된 권한</div>
+                <div class="column">{{ token.scope|scope_display }}</div>
+            </div>
+        </div>
+        <a class="button is-danger" href="{{ url_for('oauth.revoke', app_idx=app.idx) }}">취소하기</a>
+    </section>
+{% endif %}
+
+{% if is_owner %}
+    <section class="section" id="secret_key">
+        <h2 class="title is-4">시크릿 키</h2>
+        <div class="content is-large">
+        {% if secret is not none %}
+            <div class="columns">
+                <div class="column is-one-fifth">생성날짜</div>
+                <div class="column">{{ secret.date }}</div>
+            </div>
+        {% else %}
+            <div class="columns">
+                <div class="column is-one-fifth">생성날짜</div>
+                <div class="column">없음</div>
+            </div>
+        {% endif %}
+        {% if key is not none %}
+            <div class="columns">
+                <div class="column is-one-fifth">시크릿 키</div>
+                <div class="column"><button class="button is-primary copy" data-clipboard-text="{{ key }}">복사하기</button></div>
+            </div>
+        {% endif %}
+        </div>
+    {% if secret is not none %}
+        <a class="button is-danger" href="{{ url_for('dashboard.application.secret.delete', app_idx=app.idx) }}">삭제하기</a>
+    {% else %}
+        <a class="button is-link" href="{{ url_for('dashboard.application.secret.create', app_idx=app.idx) }}">생성하기</a>
+    {% endif %}
+    </section>
+{% endif %}
+
+{% endblock %}
+
+{% block script %}
+
+    {% if key is not none %}
+        <script src="{{ url_for('static', filename='clipboard.min.js') }}"></script>
+        <script>
+            new ClipboardJS(".copy").on("success",function(){window.alert("복사되었습니다!"),window.getSelection().removeAllRanges();});
+        </script>
+    {% endif %}
+
 {% endblock %}

@@ -14,6 +14,7 @@ from app.check import is_login
 from app.check import url_verifier
 from app.custom_error import TwoFactorRequired
 from . import detail
+from . import secret
 
 
 bp = Blueprint(
@@ -22,6 +23,7 @@ bp = Blueprint(
     url_prefix="/application"
 )
 bp.register_blueprint(detail.bp)
+bp.register_blueprint(secret.bp)
 
 
 @bp.get("")

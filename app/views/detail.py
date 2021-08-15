@@ -10,6 +10,7 @@ from app import db
 from app.models import User
 from app.models import Token
 from app.models import Application
+from app.models import ApplicationSecret
 from app.check import is_two_factor_enabled
 from app.check import is_login
 from app.check import url_verifier
@@ -44,12 +45,29 @@ def show(app_idx: str):
     else:
         token = None
 
+    is_owner = app.owner_idx == session.get("user", {}).get("idx", None)
+
+    if is_owner:
+        # 어플리케이션 시크릿을 데이터베이스에서 가져옴
+        secret = ApplicationSecret.query.filter_by(
+            target_idx=app.idx
+        ).first()
+
+        key = session.get("secret:key", None)
+        if key is not None:
+            del session['secret:key']
+    else:
+        secret = None
+        key = None
+
     return render_template(
         "dashboard/application/detail/show.html",
         app=app,
         token=token,
         owner=owner,
-        is_owner=app.owner_idx == session.get("user", {}).get("idx", None)
+        is_owner=is_owner,
+        secret=secret,
+        key=key
     )
 
 
