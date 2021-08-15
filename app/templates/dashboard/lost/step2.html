@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <section class="section">
+        <h1 class="title">비밀번호 초기화</h1>
+        <h2 class="subtitle">인증코드를 입력해주세요.</h2>
+    </section>
+
+    <section class="section">
+        <form method="post">
+            <div class="field is-horizontal">
+                <div class="field-label is-normal">
+                    <label class="label">인증코드</label>
+                </div>
+                <div class="field-body">
+                    <div class="field">
+                        <p class="control">
+                            <input class="input is-medium" type="tel" name="token" required="required" minlength="6" maxlength="6">
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="button is-link is-medium is-fullwidth">다음</button>
+        </form>
+    </section>
+{% endblock %}
