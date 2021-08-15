@@ -161,7 +161,7 @@ class ApplicationSecret(db.Model):
     )
 
     def __repr__(self):
-        return f"<ApplicationSecret idx={self.idx}, target_idx={self.target_idx}>"
+        return f"<ApplicationSecret target_idx={self.target_idx}>"
 
 
 # 토큰 생성 코드:
