@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <section class="section">
+        <h1 class="title">계정 삭제</h1>
+        <h2 class="subtitle"></h2>
+    </section>
+
+    <section class="section">
+        <form method="post">
+            <div class="content is-large">
+                <p>해당 계정({{ session['user']['nickname'] }})을 삭제하시겠습니까?</p>
+            </div>
+
+            <button type="submit" class="button is-link is-medium is-fullwidth">계정 삭제하기</button>
+        </form>
+    </section>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+{% block content %}
+    <section class="section">
+        <h1 class="title">계정 삭제</h1>
+        <h2 class="subtitle"></h2>
+    </section>
+
+    <section class="section">
+        <div class="content is-large">
+            <p>해당 계정({{ session['user']['nickname'] }})을 삭제할 수 없습니다.</p>
+            <p>삭제 하려면 해당 계정에 등록 되어있는 어플리케이션을 모두 삭제해야합니다.</p>
+        </div>
+    </section>
+{% endblock %}
