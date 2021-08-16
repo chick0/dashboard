@@ -1,5 +1,9 @@
 # Dashboard
 
+[Website](https://dash.ch1ck.xyz/) / [GitBook](https://chick0.gitbook.io/dashboard/)
+
+대시보드 프로젝트는 OAuth 기능을 제공하는 웹 사이트 입니다.
+
 ## 서버 시작하기
 
 1. 의존성 설치하기
