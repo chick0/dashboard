@@ -121,7 +121,7 @@ def register_post():
 
     # 유저한테 입력받은 콜백 링크가 올바른지 검증하기
     app.callback = url_verifier(
-        url=request.form.get("homepage", "http://localhost:8082/login/callback"),
+        url=request.form.get("callback", "http://localhost:8082/login/callback"),
         fallback="http://localhost:8082/login/callback"
     )[:500]
 
