@@ -14,6 +14,13 @@
     <section class="section">
         <h2 class="title is-4">어플리케이션 정보</h2>
         <div class="content is-large">
+        {% if is_owner %}
+            <div class="columns">
+                <div class="column is-one-fifth">앱 아이디</div>
+                <div class="column"><button class="button is-info copy" data-clipboard-text="{{ app.idx }}">복사하기</button></div>
+            </div>
+            {% set copy = true %}
+        {% endif %}
             <div class="columns">
                 <div class="column is-one-fifth">홈페이지</div>
                 <div class="column"><a href="{{ app.homepage }}">{{ app.homepage }}</a></div>
@@ -66,6 +73,7 @@
                 <div class="column is-one-fifth">시크릿 키</div>
                 <div class="column"><button class="button is-primary copy" data-clipboard-text="{{ key }}">복사하기</button></div>
             </div>
+            {% set copy = true %}
         {% endif %}
         </div>
     {% if secret is not none %}
@@ -80,7 +88,7 @@
 
 {% block script %}
 
-    {% if key is not none %}
+    {% if copy is not none %}
         <script src="{{ url_for('static', filename='clipboard.min.js') }}"></script>
         <script>
             new ClipboardJS(".copy").on("success",function(){window.alert("복사되었습니다!"),window.getSelection().removeAllRanges();});
